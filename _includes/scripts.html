@@ -1,0 +1,85 @@
+
+<script src="assets/js/jquery-1.11.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script>
+    /* Google map
+    ------------------------------------------------*/
+    var map = '';
+    var center;
+
+    function initialize() {
+        var mapOptions = {
+                            zoom: 16,
+                            center: new google.maps.LatLng(13.758468,100.567481),
+                            scrollwheel: false
+                        };  
+    
+        map = new google.maps.Map(document.getElementById('google-map'),  mapOptions);
+
+        google.maps.event.addDomListener(map, 'idle', function() {
+            calculateCenter();
+        });
+    
+        google.maps.event.addDomListener(window, 'resize', function() {
+            map.setCenter(center);
+        });
+    } // initialize
+
+    function calculateCenter() {
+        center = map.getCenter();
+    }
+
+    function loadGoogleMap(){
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' + 'callback=initialize';
+        document.body.appendChild(script);
+    }
+  
+    // DOM is ready.
+    $(document).ready(function(){
+        loadGoogleMap();
+    });
+</script>
+
+
+<!-- for gallery -->
+<script src="assets/js/imagesloaded.3.1.8.min.js"></script>
+<script src="assets/js/jquery.masonry.3.2.1.min.js"></script> <!-- http://masonry.desandro.com/ -->
+<script src="assets/js/jquery.magnific-popup.min.js"></script> <!-- http://dimsemenov.com/plugins/magnific-popup/ -->
+
+<script>
+    function init_masonry(){
+      var $container = $('#content');
+
+      $container.imagesLoaded( function(){
+          $container.masonry({
+            itemSelector: '.box',
+            isAnimated: true
+        });
+      });
+    }
+
+    $(document).ready(function(){
+        
+        //Init jQuery Masonry layout
+        init_masonry();
+
+        // Magnific Popup
+        $('.gallery-images-container').magnificPopup({
+            delegate: 'a', // child items selector, by clicking on it popup will open
+            type: 'image',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+            },
+        });
+
+        //Select menu onchange
+        $("#collapsed-navbar").change(function () {
+            window.location = $(this).val();
+        });
+    
+    });
+</script>

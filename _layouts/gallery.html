@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include head.html %}
+
+<body class="gallery-page">
+
+    <div class="main-body">
+        <div class="container">
+            <div class="row">
+               
+                <div class="main-page">
+                    
+                {% include /navigation.html %}
+                {{content}}
+                    
+                </div> <!-- .main-page -->
+            </div> <!-- .row -->
+            {% include footer.html %}
+        </div> <!-- .container -->
+    </div>  <!-- .main-body -->
+
+
+{% include scripts.html %}
+</body>
+</html> 
+
